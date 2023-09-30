@@ -1,34 +1,21 @@
-/* Box Model Hack */
-html {
-  box-sizing: border-box;
+.beige{
+  background-color: beige;  
+}
+.brown{
+  background-color: burlywood;
 }
 
-*,
-*::before,
-*::after {
-  box-sizing: inherit;
+.square{
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
 }
-
-/* Clear fix hack */
-.clearfix:after {
-  content: ".";
-  display: block;
-  clear: both;
-  visibility: hidden;
-  line-height: 0;
-  height: 0;
+.square svg{
+  width: 30px;
+  height: 30px;
+  margin: 5px;
 }
-
-.clear {
-  clear: both;
+.white svg{
+  fill: white;
 }
-
-/******************************************
-  /* BASE STYLES
-  /*******************************************/
-/******************************************
-  /* LAYOUT
-  /*******************************************/
-/******************************************
-  /* ADDITIONAL STYLES
-  /*******************************************/

@@ -5,17 +5,20 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="/dist/css/output.css" rel="stylesheet">
-  <link rel="stylesheet" type="text/css" href="/dist/css/normalize.css" />
+  <link rel="stylesheet" href="/dist/css/main.css">
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <script src="https://kit.fontawesome.com/bec6234410.js" crossorigin="anonymous"></script>
-  <script type="text/javascript" src="js/main.js" defer></script>
+  <script type="text/javascript" src="/public/js/main.js" defer></script>
+  <script type="text/javascript" src=" /public/js/pieces.js" defer></script>
 </head>
 
 <body>
-  <h1 class="text-3xl font-bold text-fuchsia-200">
-    Hello world!
-  </h1>
+  <section class="gameboard flex flex-wrap  m-auto w-80 h-80 bg-slate-500">
+  </section>
+
+  <p class="">It is <span id="player"></span>'s turn.</p>
+  <p id="infoDisplay"></p>
 </body>
 
 </html>
