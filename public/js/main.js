@@ -1,8 +1,10 @@
-"use strict"
-const chessboard = document.querySelector('.gameboard')
-const turnDisplay = document.querySelector('.turnDisplay')
-const gameboard = document.querySelector('.gameboard')
-const width = 8
+"use strict";
+const playerDisplay = document.querySelector(".playerDisplay");
+const gameboard = document.querySelector(".gameboard");
+const infoDisplay = document.querySelector(".infoDisplay");
+const width = 8;
+let playerGo = "black";
+playerDisplay.textContent = "black";
 
 const rook =
 	'<div class="piece" id="rook"><svg xmlns="http://www.w3.org/2000/svg" height="1.5em" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M32 192V48c0-8.8 7.2-16 16-16h64c8.8 0 16 7.2 16 16V88c0 4.4 3.6 8 8 8h32c4.4 0 8-3.6 8-8V48c0-8.8 7.2-16 16-16h64c8.8 0 16 7.2 16 16V88c0 4.4 3.6 8 8 8h32c4.4 0 8-3.6 8-8V48c0-8.8 7.2-16 16-16h64c8.8 0 16 7.2 16 16V192c0 10.1-4.7 19.6-12.8 25.6L352 256l16 144H80L96 256 44.8 217.6C36.7 211.6 32 202.1 32 192zm176 96h32c8.8 0 16-7.2 16-16V224c0-17.7-14.3-32-32-32s-32 14.3-32 32v48c0 8.8 7.2 16 16 16zM22.6 473.4L64 432H384l41.4 41.4c4.2 4.2 6.6 10 6.6 16c0 12.5-10.1 22.6-22.6 22.6H38.6C26.1 512 16 501.9 16 489.4c0-6 2.4-11.8 6.6-16z"/></svg></div> ';
@@ -18,40 +20,153 @@ const pawn =
 	'<div class="piece" id="pawn"><svg xmlns="http://www.w3.org/2000/svg" height="1.5em" viewBox="0 0 320 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M105.1 224H80a16 16 0 0 0-16 16v32a16 16 0 0 0 16 16h16v5.49c0 44-4.14 86.6-24 122.51h176c-19.89-35.91-24-78.51-24-122.51V288h16a16 16 0 0 0 16-16v-32a16 16 0 0 0-16-16h-25.1c29.39-18.38 49.1-50.78 49.1-88a104 104 0 0 0-208 0c0 37.22 19.71 69.62 49.1 88zM304 448H16a16 16 0 0 0-16 16v32a16 16 0 0 0 16 16h288a16 16 0 0 0 16-16v-32a16 16 0 0 0-16-16z"/></svg>';
 
 const startPieces = [
-  rook, knight, bishop, queen, king, bishop, knight, rook,
-  pawn, pawn, pawn, pawn, pawn, pawn, pawn, pawn,
-  '','','','','','','','',
-  '','','','','','','','',
-  '','','','','','','','',
-  '','','','','','','','',
-  pawn, pawn, pawn, pawn, pawn, pawn, pawn, pawn,
-  rook, knight, bishop, queen, king, bishop, knight, rook
-]
+	rook,
+	knight,
+	bishop,
+	queen,
+	king,
+	bishop,
+	knight,
+	rook,
+	pawn,
+	pawn,
+	pawn,
+	pawn,
+	pawn,
+	pawn,
+	pawn,
+	pawn,
+	"",
+	"",
+	"",
+	"",
+	"",
+	"",
+	"",
+	"",
+	"",
+	"",
+	"",
+	"",
+	"",
+	"",
+	"",
+	"",
+	"",
+	"",
+	"",
+	"",
+	"",
+	"",
+	"",
+	"",
+	"",
+	"",
+	"",
+	"",
+	"",
+	"",
+	"",
+	"",
+	pawn,
+	pawn,
+	pawn,
+	pawn,
+	pawn,
+	pawn,
+	pawn,
+	pawn,
+	rook,
+	knight,
+	bishop,
+	queen,
+	king,
+	bishop,
+	knight,
+	rook,
+];
 // createBoard function injected into gameboard section
 function createBoard() {
-  startPieces.forEach((startPiece, i) => {
-    const square = document.createElement('section')
-    square.classList.add('square')
-    square.innerHTML = startPiece
-    square.setAttribute('square-id', i)
-    const row = Math.floor((63 - i) / 8) + 1
-    if (row % 2 === 0) square.classList.add(i % 2 === 0 ? 'beige' : 'brown')
-    else square.classList.add(i % 2 === 0 ? 'brown' : 'beige');
-    
-    if (i <= 15) square.classList.add('white');
-    gameboard.append(square)
-    
-  })
+	startPieces.forEach((startPiece, i) => {
+		const square = document.createElement("section");
+		square.classList.add("square");
+		square.innerHTML = startPiece;
+		square.firstChild?.setAttribute("draggable", true);
+		square.setAttribute("square-id", i);
+		const row = Math.floor((63 - i) / 8) + 1;
+		if (row % 2 === 0) square.classList.add(i % 2 === 0 ? "beige" : "brown");
+		else square.classList.add(i % 2 === 0 ? "brown" : "beige");
 
-  
-  // loop through startPieces and create div for each square
-  // add a class to it
-  // style gameboard
-  // style square
-  // alternate square colors
-  // append gameboard with square
-  // set square attribute to i
-  // add pieces innerhtml
+		if (i <= 15) square.classList.add("black");
+		if (i >= 48) square.firstChild.classList.add("white");
+		gameboard.append(square);
+	});
+
+	// loop through startPieces and create div for each square
+	// add a class to it
+	// style gameboard
+	// style square
+	// alternate square colors
+	// append gameboard with square
+	// set square attribute to i
+	// add pieces innerhtml
 }
 
-createBoard()
+createBoard();
+
+// grab every square
+// add event listeners to them
+const allSquares = document.querySelectorAll(".square");
+allSquares.forEach((square) => {
+	square.addEventListener("dragstart", dragStart);
+	square.addEventListener("dragover", dragOver);
+	square.addEventListener("drop", dragDrop);
+});
+
+let startPositionId;
+let draggedElement;
+
+function dragStart(e) {
+	startPositionId = e.target.parentNode.getAttribute("square-id");
+	draggedElement = e.target;
+}
+
+function dragOver(e) {
+  e.preventDefault();
+}
+
+function dragDrop(e) {
+  e.stopPropagation();
+	console.log('e.target', e.target);
+	const correctGo = draggedElement.firstChild.classList.contains(playerGo);
+	const taken = e.target.classList.contains("piece");
+	const opponentGo = playerGo === "white" ? "black" : "white";
+  const takenByOpponent = e.target.firstChild?.classList.contains("opponentGo");
+	// e.target.parentNode.append(draggedElement)
+	// e.target.append(draggedElement)
+	// e.target.remove()
+	changePlayer();
+}
+function changePlayer() {
+	if (playerGo === "black") {
+		playerGo = "white";
+		playerDisplay.textContent = "white";
+		reverseIds();
+	} else {
+		playerGo = "black";
+		playerDisplay.textContent = "black";
+		revertIds();
+	}
+}
+
+function reverseIds() {
+	const allSquares = document.querySelectorAll(".square");
+	allSquares.forEach((square, i) =>
+		square.setAttribute("square-id", (width * width - 1) - i)
+	);
+}
+
+function revertIds() {
+	const allSquares = document.querySelectorAll(".square");
+	allSquares.forEach((square, i) => square.setAttribute("square-id", i));
+}

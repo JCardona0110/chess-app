@@ -10,12 +10,27 @@
   height: 40px;
   display: flex;
   justify-content: center;
+  position: relative;
 }
 .square svg{
   width: 30px;
   height: 30px;
   margin: 5px;
+  position: relative;
+  z-index: -9;  
 }
+
+path{
+  position: relative;
+  z-index: -10;
+}
+
+.piece{
+  position: relative;
+  z-index: 9;
+}
+
+
 .white svg{
   fill: white;
 }
