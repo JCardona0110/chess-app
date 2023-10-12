@@ -170,7 +170,16 @@ function dragDrop(e) {
 		}
 	}
 }
-
+function checkIfValid(target) {
+	const targetId =
+		~~target.getAttribute("square-id") ||
+		~~target.parentNode.getAttribute("square-id");
+	const startId = ~~startPositionId;
+	const piece = draggedElement.id;
+	console.log("targetId", targetId);
+	console.log("startId", startId);
+	console.log("piece", piece);
+	
 function changePlayer() {
 	playerDisplay.textContent = "black";
 	if (playerGo === "black") {
@@ -196,15 +205,7 @@ function revertIds() {
 	allSquares.forEach((square, i) => square.setAttribute("square-id", i));
 }
 
-function checkIfValid(target) {
-	const targetId =
-		~~target.getAttribute("square-id") ||
-		~~target.parentNode.getAttribute("square-id");
-	const startId = ~~startPositionId;
-	const piece = draggedElement.id;
-	console.log("targetId", targetId);
-	console.log("startId", startId);
-	console.log("piece", piece);
+
 
 	switch (piece) {
 		case "pawn":
